@@ -1,4 +1,4 @@
-import { getMemoById } from "@/lib/memos";
+import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -15,7 +15,9 @@ export default async function MemoDetailPage({ params }: Props) {
     notFound();
   }
 
-  const memo = getMemoById(memoId);
+  const memo = await prisma.memo.findUnique({
+    where: { id: memoId },
+  });
 
   if (!memo) {
     notFound();

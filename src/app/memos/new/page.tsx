@@ -1,10 +1,12 @@
 import NewMemoForm from "./NewMemoForm";
 
+import { createMemo } from "./actions";
+
 export default function NewMemoPage() {
   return (
     <main>
       <h1>New Memo</h1>
-      <NewMemoForm />
+      <NewMemoForm action={createMemo} />
     </main>
   );
 }

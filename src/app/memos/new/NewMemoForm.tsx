@@ -1,44 +1,23 @@
 "use client";
 
-import { useState } from "react";
-
-export default function NewMemoForm() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    // 今はDBがないので「送信できたこと」を確認するだけ
-    console.log("Create memo:", { title, content });
-
-    alert("Saved (mock)! Check console.");
-    setTitle("");
-    setContent("");
-  }
-
+export default function NewMemoForm({
+  action,
+}: {
+  action: (formData: FormData) => void;
+}) {
   return (
-    <form onSubmit={handleSubmit}>
+    <form action={action}>
       <div>
         <label>
           Title
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="e.g. Leran Next.js"
-          />
+          <input type="text" name="title" />
         </label>
       </div>
 
       <div>
         <label>
           Content
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your memo..."
-          />
+          <textarea name="content" />
         </label>
       </div>
 

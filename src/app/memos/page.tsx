@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { getMemos } from "@/lib/memos";
+import { prisma } from "@/lib/prisma";
 
-export default function MemosPage() {
-  const memos = getMemos();
+export default async function MemosPage() {
+  const memos = await prisma.memo.findMany({
+    orderBy: { createdAt: "desc" },
+  });
 
   return (
     <main>
