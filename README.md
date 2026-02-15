@@ -34,4 +34,51 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# memo-app
+
+# Memo-app
+
+A simple full-stack memo application built with Next.js (App Router), Prisma, and PostgreSQL.
+
+## Feature
+
+- Create, Read, Update, Delete (CRUD) memos
+- Server Actions for data mutations
+- Zod validation
+- PostgreSQL with Prisma ORM
+- Tailwind CSS for styling
+
+## Tech Stack
+
+- Next.js (App Router)
+- TypeScript
+- Prisma (with PostgreSQL adapter)
+- PostgreSQL (Docker)
+- Zod
+- Tailwind CSS
+
+## Architecture
+
+- Server Components for data fetching
+- Client Components for interactive forms
+- Server Actions for mutations
+- Prisma as the data access layer
+
+## Why Server Actions?
+
+Server Actions simplify data mutation by:
+
+- Removing the need for custom API routes
+- Keeping database logic on the server
+- Improving type safety between client and server
+
+## Future Improvements
+
+- Authentication
+- Role-based access control
+- Better error handling
+- Toast notifications
+- E2E testing
+
+---
+
+Built for learning modern full-stack development.
