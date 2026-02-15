@@ -2,21 +2,28 @@
 
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
+import { memoSchema } from "@/lib/validation";
 
-export async function createMemo(formData: FormData) {
-  const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
+export type CreateMemoState = {
+  error?: string;
+};
 
-  if (!title || !content) {
-    throw new Error("Title and content are required");
+export async function createMemo(
+  _prevState: CreateMemoState,
+  formData: FormData,
+): Promise<CreateMemoState> {
+  const raw = {
+    title: String(formData.get("title") ?? ""),
+    content: String(formData.get("content") ?? ""),
+  };
+
+  const parsed = memoSchema.safeParse(raw);
+
+  if (!parsed.success) {
+    return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
-  await prisma.memo.create({
-    data: {
-      title,
-      content,
-    },
-  });
+  await prisma.memo.create({ data: parsed.data });
 
   redirect("/memos");
 }

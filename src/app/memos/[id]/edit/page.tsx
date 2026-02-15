@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import EditMemoForm from "./EditMemoForm";
-import { updateMemo } from "./actions";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -19,7 +18,7 @@ export default async function EditMemoPage({ params }: Props) {
 
   return (
     <main>
-      <EditMemoForm memo={memo} action={updateMemo} />
+      <EditMemoForm memo={memo} />
     </main>
   );
 }

@@ -1,6 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useActionState } from "react";
+import type { UpdateMemoState } from "./actions";
+import { updateMemo } from "./actions";
+
+const initialState: UpdateMemoState = {};
 
 type Memo = {
   id: number;
@@ -8,20 +13,15 @@ type Memo = {
   content: string;
 };
 
-type Action = (formDara: FormData) => Promise<void>;
-
-export default function EditMemoForm({
-  memo,
-  action,
-}: {
-  memo: Memo;
-  action: Action;
-}) {
+export default function EditMemoForm({ memo }: { memo: Memo }) {
   const [title, setTitle] = useState(memo.title);
   const [content, setContetnt] = useState(memo.content);
+  const [state, formAction] = useActionState(updateMemo, initialState);
 
   return (
-    <form action={action}>
+    <form action={formAction}>
+      {state.error && <p style={{ color: "red" }}>{state.error}</p>}
+
       <input type="hidden" name="id" value={memo.id} />
       <div>
         <label>

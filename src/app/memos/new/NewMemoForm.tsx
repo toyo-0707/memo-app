@@ -1,12 +1,18 @@
 "use client";
 
-export default function NewMemoForm({
-  action,
-}: {
-  action: (formData: FormData) => void;
-}) {
+import { useActionState } from "react";
+import { createMemo } from "./actions";
+import type { CreateMemoState } from "./actions";
+
+const initialState: CreateMemoState = {};
+
+export default function NewMemoForm() {
+  const [state, formAction] = useActionState(createMemo, initialState);
+
   return (
-    <form action={action}>
+    <form action={formAction}>
+      {state.error && <p style={{ color: "red" }}>{state.error}</p>}
+
       <div>
         <label>
           Title
